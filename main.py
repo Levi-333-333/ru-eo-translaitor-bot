@@ -21,7 +21,7 @@ bot = Bot(token=TOKEN)
 
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
-    await message.answer(f"Hello, {message.from_user.full_name}!")
+    await message.answer(f"Привет, это бот-переводчик из русского языка на эсперанто! Принцип работы прост: вы пишете сообщение боту на русском - он отвечает на эсперанто, и наоборот!\nSaluton, mi estas roboto por tradukado inter la rusa kaj Esperanto! Ĝi funkcias simple: vi sendas al la roboto mesaĝon en la rusa, kaj ĝi respondas en Esperanto — kaj inverse!")
 
 @dp.message(F.text)
 async def text_message_handler(message: Message) -> None:
@@ -32,7 +32,7 @@ async def text_message_handler(message: Message) -> None:
     elif input_language == 'ru':
         output_lang = 'eo'
     else:
-        await message.reply("Это не русский язык и не эсперанто. Напишите на одном из вышеперечисленных языках.")
+        await message.reply("Это не русский язык и не эсперанто. Напишите на одном из вышеперечисленных языках.\nĈi tio estas nek la rusa nek Esperanto. Bonvolu skribi en unu el la supre listigitaj lingvoj.")
         # return None
 
     result = await translator.translate(message.text, output_lang, input_language)
