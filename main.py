@@ -17,7 +17,7 @@ load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
 dp = Dispatcher()
 
-PROXY_URL = "mtproto://4bc2b4812b2f00758cbcdd415dc98537ef0fb9f5919fef01a3b11135464b7f3a@127.0.0.1:8443"
+PROXY_URL = "socks5://127.0.0.1:9050"
 session = AiohttpSession(proxy=PROXY_URL)
 
 bot = Bot(token=TOKEN, request_timeout=30, session=session)
