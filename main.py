@@ -6,6 +6,7 @@ import logging
 import sys
 
 from aiogram import Bot, Dispatcher, F
+from aiogram.client.session.aiohttp import AiohttpSession
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 
@@ -16,7 +17,10 @@ load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
 dp = Dispatcher()
 
-bot = Bot(token=TOKEN, request_timeout=30)
+PROXY_URL = "mtproto://4bc2b4812b2f00758cbcdd415dc98537ef0fb9f5919fef01a3b11135464b7f3a@127.0.0.1:8443"
+session = AiohttpSession(proxy=PROXY_URL)
+
+bot = Bot(token=TOKEN, request_timeout=30, session=session)
 
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
