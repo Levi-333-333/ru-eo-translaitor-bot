@@ -16,7 +16,7 @@ load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
 dp = Dispatcher()
 
-bot = Bot(token=TOKEN)
+bot = Bot(token=TOKEN, request_timeout=30)
 
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
