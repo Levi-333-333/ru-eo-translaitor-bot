@@ -20,7 +20,7 @@ dp = Dispatcher()
 PROXY_URL = "socks5://127.0.0.1:9050"
 session = AiohttpSession(proxy=PROXY_URL)
 
-bot = Bot(token=TOKEN, request_timeout=30, session=session)
+bot = Bot(token=TOKEN, session=session)
 
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
