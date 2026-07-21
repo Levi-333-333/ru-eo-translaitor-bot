@@ -5,17 +5,16 @@ import asyncio
 import logging
 import sys
 
-from googletrans import Translator
-
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import CommandStart
 from aiogram.types import Message
+
+from translate import translate
 
 load_dotenv()
 
 TOKEN = getenv("BOT_TOKEN")
 dp = Dispatcher()
-translator = Translator()
 
 bot = Bot(token=TOKEN)
 
@@ -25,12 +24,7 @@ async def command_start_handler(message: Message) -> None:
 
 @dp.message(F.text)
 async def text_message_handler(message: Message) -> None:
-    input_language = (await translator.detect(message.text)).lang
-    output_lang = 'ru' if input_language == 'eo' else 'eo'
-
-    result = await translator.translate(message.text, output_lang, input_language)
-
-    await message.reply(result.text)
+    await message.reply(translate(message.text))
 
 async def main() -> None:
     await dp.start_polling(bot)
