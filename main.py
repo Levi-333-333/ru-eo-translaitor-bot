@@ -9,8 +9,8 @@ from handlers import *
 
 load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
+PROXY_URL = getenv("PROXY_URL")
 
-PROXY_URL = "socks5://127.0.0.1:9050"
 session = AiohttpSession(proxy=PROXY_URL)
 
 bot = Bot(token=TOKEN, session=session)
