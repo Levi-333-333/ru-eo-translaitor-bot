@@ -13,7 +13,8 @@ def translate(text: str) -> str:
     }
 
     eo_special_chars = ['ĉ', 'ĝ', 'ĥ', 'ĵ', 'ŝ', 'ŭ', 'Ĉ', 'Ĝ', 'Ĥ', 'Ĵ', 'Ŝ', 'Ŭ']
-    is_eo = any(car in strip_text for car in eo_special_chars) or strip_text.isascii()
+    eo_words = ('esperanto', 'birdo', 'domo', 'amiko', 'patro', 'libro', 'tago', 'jaro', 'bela', 'bona', 'nova', 'rapida', 'facile', 'bone', 'ami', 'vidi', 'esti', 'havi', 'iri', 'voli', 'povi', 'la', 'kaj', 'kun', 'por', 'pri', 'ĉar', 'tamen', 'sub', 'sur', 'apud', 'hodiaŭ', 'morgaŭ', 'tiam', 'ĉiam', 'kiam', 'tio', 'kio', 'ĉio', 'nenio', 'tiu', 'kiu', 'ĉiu', 'neniu', 'tie', 'kie', 'ĉie', 'nenie', 'tiel', 'kiel', 'ĉiel', 'neniel', 'tial', 'kial', 'ĉial', 'nenial')
+    is_eo = any(word in strip_text for word in eo_words) or any(car in strip_text for car in eo_special_chars) or strip_text.isascii()
 
     if is_eo:
         input_lang = 'eo'
