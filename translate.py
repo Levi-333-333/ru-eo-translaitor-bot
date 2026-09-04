@@ -1,10 +1,12 @@
 from dotenv import load_dotenv
 from deep_translator import GoogleTranslator
+from exceptions import Empty_text_exception
+from restrictions import is_long
 
-def detect_leanguage(text:str) -> dict[str, str]:
+def detect_language(text:str) -> dict[str, str]:
     strip_text = text.strip()
     if not strip_text:
-        raise Exception
+        raise Empty_text_exception("Вы отправили пустое сообщение. Бот не смог его обработать.\n\nVi sendis malplenan mesaĝon. Laroboto ne povis trakti ĝin.")
 
     eo_special_chars = ['ĉ', 'ĝ', 'ĥ', 'ĵ', 'ŝ', 'ŭ', 'Ĉ', 'Ĝ', 'Ĥ', 'Ĵ', 'Ŝ', 'Ŭ']
     eo_words = ('esperanto', 'birdo', 'domo', 'amiko', 'patro', 'libro', 'tago', 'jaro', 'bela', 'bona', 'nova',
@@ -27,11 +29,13 @@ def detect_leanguage(text:str) -> dict[str, str]:
     }
 
 def translate(text:str) -> str:
+    is_long(text)
+
     PROXY_URL = load_dotenv("PROXY_URL")
     proxy = {
         "http": PROXY_URL,
         "https": PROXY_URL
     }
 
-    langs = detect_leanguage(text)
+    langs = detect_language(text)
     return GoogleTranslator(source=langs["input_lang"], target=langs["output_lang"], proxies=proxy).translate(text)

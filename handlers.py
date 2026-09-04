@@ -2,7 +2,6 @@ from aiogram import Dispatcher, F
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 from translate import translate
-from restrictions import is_long
 
 dp = Dispatcher()
 
@@ -12,10 +11,7 @@ async def command_start_handler(message: Message) -> None:
 
 @dp.message(F.text)
 async def text_message_handler(message: Message) -> None:
-    if is_long(message.text):
-        await message.reply("Длинна сообщения не доджна превышать 5000 симполов. Уменьшите объём текста.\n\nLa mesaĝo longeco ne devas superi 5000 signojn. Redukti la kvanton da teksto.")
-        return
     try:
         await message.reply(translate(message.text))
-    except Exception:
-        await message.reply("Вы отправили пустое сообщение. Бот не смог его обработать.\n\nVi sendis malplenan mesaĝon. Laroboto ne povis trakti ĝin.")
+    except Exception as e:
+        await message.reply(e)
