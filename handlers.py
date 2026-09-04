@@ -14,4 +14,4 @@ async def text_message_handler(message: Message) -> None:
     try:
         await message.reply(translate(message.text))
     except Exception as e:
-        await message.reply(e)
+        await message.reply(str(e))
