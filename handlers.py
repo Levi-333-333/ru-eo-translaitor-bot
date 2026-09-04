@@ -15,4 +15,7 @@ async def text_message_handler(message: Message) -> None:
     if is_long(message.text):
         await message.reply("Длинна сообщения не доджна превышать 5000 симполов. Уменьшите объём текста.\n\nLa mesaĝo longeco ne devas superi 5000 signojn. Redukti la kvanton da teksto.")
         return
-    await message.reply(translate(message.text))
+    try:
+        await message.reply(translate(message.text))
+    except Exception:
+        await message.reply("Вы отправили пустое сообщение. Бот не смог его обработать.\n\nVi sendis malplenan mesaĝon. Laroboto ne povis trakti ĝin.")
