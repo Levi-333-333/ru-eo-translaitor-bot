@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from deep_translator import GoogleTranslator
-from exceptions import Empty_text_exception
+from exceptions import Empty_text_exception, Text_lenght_exception
 from restrictions import is_long
 
 def detect_language(text:str) -> dict[str, str]:
@@ -29,7 +29,8 @@ def detect_language(text:str) -> dict[str, str]:
     }
 
 def translate(text:str) -> str:
-    is_long(text)
+    if is_long(text):
+        raise Text_lenght_exception("Длинна сообщения не доджна превышать 5000 симполов. Уменьшите объём текста.\n\nLa mesaĝo longeco ne devas superi 5000 signojn. Redukti la kvanton da teksto.")
 
     PROXY_URL = load_dotenv("PROXY_URL")
     proxy = {
